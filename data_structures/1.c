@@ -11,6 +11,7 @@
  * 判断str字符串每个字符是否唯一
  *
  * T = O(n)
+ *
  */
 int isUnique(char *str, int len)
 {
@@ -29,6 +30,36 @@ int isUnique(char *str, int len)
 	return flag;
 }
 
+/**
+ * bitmap判断str字符串每个字符是否唯一
+ *
+ * T = O(n)
+ *
+ */
+int isUniqueBitmap(char *str, int len)
+{
+	int index_loc, bit_loc, num, flag, arr[8];
+	char *p = str;
+
+	memset(arr, 0, sizeof(arr));
+
+	flag = 1;
+	while (*p != '\0') {
+		num = (int)*p;
+		index_loc = num / 32;
+		bit_loc = num % 32;
+		
+		if (arr[index_loc] & (1 << bit_loc)) {
+			flag = 0;
+			break;
+		} else {
+			arr[index_loc] |= 1 << bit_loc;
+			p ++;
+		}
+	}
+
+	return flag;
+}
 
 int main()
 {
@@ -43,6 +74,15 @@ int main()
 			printf("unique!\n");
 		else
 			printf("repeat!\n");
+
+
+		flag = isUniqueBitmap(str, len);
+		if (flag)
+			printf("unique!\n");
+		else
+			printf("repeat!\n");
+		
+		memset(str, '\0', sizeof(str));
 	}
 
 	return 0;
