@@ -81,8 +81,6 @@ int main()
 			printf("unique!\n");
 		else
 			printf("repeat!\n");
-		
-		memset(str, '\0', sizeof(str));
 	}
 
 	return 0;
