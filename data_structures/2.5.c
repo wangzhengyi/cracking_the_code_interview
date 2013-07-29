@@ -1,3 +1,8 @@
+/**
+ * Given a circular linked list, implement an algorithm which returns
+ * node at the begining of the loop
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
