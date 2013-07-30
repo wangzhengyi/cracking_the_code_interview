@@ -14,6 +14,12 @@ typedef struct link {
 	int value;
 } link;
 
+typedef struct stack {
+	int top;
+	int data[1000];
+} stack;
+
+
 /**
  * 创建单链表
  *
@@ -48,13 +54,20 @@ void createLinklist(link **head, int data)
  * T = O(n)
  *
  */
-void printLinklist(link *head)
+void printReverseLinklist(link *head)
 {
-	while (head->next != NULL) {
-		printf("%d", head->value);
+	stack *s = (stack *)malloc(sizeof(stack));
+	s->top = 0;
+
+	while (head != NULL) {
+		s->data[s->top ++] = head->value;
 		head = head->next;
 	}
-	printf("%d\n", head->value);
+
+	while (s->top) {
+		printf("%d", s->data[-- s->top]);
+	}
+	printf("\n");
 }
 
 /**
@@ -147,12 +160,14 @@ int main(void)
 			createLinklist(&head2, data);
 		}
 
+
+		printReverseLinklist(head1);
+		printReverseLinklist(head2);
+
 		// 链表加法
 		head3 = addLink(head1, head2);
+		printReverseLinklist(head3);
 
-		printLinklist(head1);
-		printLinklist(head2);
-		printLinklist(head3);
 	}
 
 	return 0;
