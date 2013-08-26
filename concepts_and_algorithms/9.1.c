@@ -7,6 +7,12 @@
 #include <string.h>
 #include <stdlib.h>
 
+/**
+ * 合并思想
+ *
+ * T = O(size_a + size_b)
+ *
+ */
 void merge(int *a, int *b, int size_a, int size_b)
 {
 	int i, j, k, len;
