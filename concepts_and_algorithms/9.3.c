@@ -23,29 +23,26 @@ int findKey(int *arr, int begin, int end, int key)
 	while (begin <= end) {
 		mid = (begin + end) / 2;
 
+		// 找到条件
 		if (arr[mid] == key) {
 			return mid;
-		} else if (arr[mid] > key) {
-			if (arr[mid] > arr[begin]) { // 前半段
-				if (arr[begin] > key) {
-					begin = mid + 1;
-				} else {
-					end = mid - 1;
-				}
-			} else { // 后半段
+		} 	
+		
+		/*这里需要分两段讨论，假设我们的曲线是先大增，后小增的曲线*/
+
+		if (arr[mid] >= arr[begin]) {	// 处于前半段
+			if (key >= arr[begin] && key < arr[mid])
 				end = mid - 1;
-			}
-		} else {
-			if (arr[mid] > arr[begin]) {
+			else
 				begin = mid + 1;
-			} else {
-				if (arr[end] < key) {
-					end = mid - 1;
-				} else {
-					begin = mid + 1;
-				}
-			}
-		}	
+		}
+
+		if (arr[mid] <= arr[begin]) {	// 处于后半段
+			if (key > arr[mid] && key <= arr[end])
+				begin = mid + 1;
+			else
+				end = mid - 1;
+		}
 	}
 
 	return -1;
@@ -63,7 +60,7 @@ int main(void)
 
 	while (scanf("%d", &key) != EOF) {
 		loc = findKey(arr, 0, n - 1, key);
-		printf("%d\n", loc);
+		printf("%d\n", loc + 1);
 	}
 
 	free(arr);
