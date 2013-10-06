@@ -22,6 +22,27 @@ int numZeros(int n)
 }
 
 /**
+ * 计算5的数量方法2
+ *
+ */
+int numZeros2(int n)
+{
+	int i, j, count = 0;
+
+	for (i = 1; i <= n; i ++) {
+		j = i;
+
+		while (j % 5 == 0) {
+			count ++;
+			j /= 5;
+		}
+	}
+
+	return count;
+}
+
+
+/**
  * 计算阶乘，取余求0的数量
  */
 long long int calNumZeros(int n)
@@ -53,6 +74,8 @@ int main(void)
 
 	while (scanf("%d", &n) != EOF) {
 		printf("%d\n", numZeros(n));
+
+		printf("%d\n", numZeros2(n));
 
 		printf("%lld\n", calNumZeros(n));
 	}
